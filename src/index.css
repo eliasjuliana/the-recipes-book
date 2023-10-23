@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@300;400;600&family=Roboto:wght@300;500;900&display=swap');
+
+*{
+  font-family: 'Roboto', sans-serif;
+}
+body {
+  background-color: #e6e0d7;
+}
+
+#root{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main{
+  margin-top: 60px;
+  margin-bottom: 25px;
+  flex: 1 0 auto;
+}
+
+
+footer{
+  flex-shrink: 0;
+}
