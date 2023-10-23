@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import './App.css'
 import HomeView from './views/HomeView'
 import DetailView from './views/DetailView'
 import AdminView from './views/AdminView'
@@ -13,7 +12,7 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Navbar/>
-      <main>
+      <main className='container-fluid'>
         <Routes>
             <Route path='/' element={<HomeView/>}/>
             <Route path='/detalle' element={<DetailView/>}/>

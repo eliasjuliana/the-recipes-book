@@ -31,6 +31,11 @@ const Navbar = () => {
                   Login
                 </NavLink>
               </li>
+              <li className="nav-item">
+                <NavLink className={`nav-link`} to="/admin">
+                  Admin
+                </NavLink>
+              </li>
             </ul>
           </div>
         </div>
