@@ -3,17 +3,17 @@ import AdminCard from "./AdminCard";
 
 const AdminGallery = (props) => {
 
-    const {blogs, setBlogs} = props;
-
-
+    const {blogs} = props;
 
     return (
-        <section className="container row mt-5">
+        <div className="container mt-5">
+        <section className="row">
                 {blogs.length === 0? <p>No hay recetas guardadas</p> : null}
                 {blogs.map((blog)=>{
                     return <AdminCard key={blog.id} blog = {blog}/>
                 })}
         </section>
+        </div>
 
     )
 }
