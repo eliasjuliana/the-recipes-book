@@ -1,8 +1,11 @@
 import AdminCard from "./AdminCard";
 
+
 const AdminGallery = (props) => {
 
     const {blogs, setBlogs} = props;
+
+
 
     return (
         <section className="container row mt-5">
