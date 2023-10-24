@@ -22,6 +22,18 @@ export const postBlogsFn = async (data) =>{
     })
 
     if(!response.ok){
-        throw new Error('Ocurrio un error al agregar un blogs')
+        throw new Error('Ocurrio un error al agregar un blog')
     }
+}
+
+export const deleteBlogFn = async (blogId)=>{
+
+    const response = await fetch(`${API_URL}/blogs/${blogId}`, {
+        method: 'DELETE'
+    })
+
+    if(!response.ok){
+        throw new Error('Ocurrio un error al eliminar un blog')
+    }
+
 }
