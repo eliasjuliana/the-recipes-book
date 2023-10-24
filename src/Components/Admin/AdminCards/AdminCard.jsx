@@ -2,10 +2,15 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import { deleteBlogFn } from "../../../api/blogs";
 import { toast } from "sonner";
+import { useBlog } from "../../../stores/useBlog";
 
 const AdminCard = (props) => {
 
   const {blog} = props;
+
+
+  // __________________ZUSTAND____________________________________
+  const {setBlogToEdit} = useBlog();
 
   // __________________TQUERY____________________________________
 
@@ -27,6 +32,11 @@ const AdminCard = (props) => {
   })
 
   // ________________HANDLER____________________________
+
+  const handleEdit = () =>{
+    setBlogToEdit(blog);
+  }
+
   const handleDelete = ()=>{
     Swal.fire({
         title: 'Estas seguro?',
@@ -52,7 +62,7 @@ const AdminCard = (props) => {
           <h5 className="card-title mb-3">{blog.title}</h5>
           {/* <p className="card-text">{blog.content}</p> */}
           <div className="d-flex justify-content-end gap-2">
-            <button className="btn btn-primary">Editar</button>
+            <button className="btn btn-primary" onClick={handleEdit}>Editar</button>
             <button className="btn btn-danger" onClick={handleDelete}>Eliminar</button>
           </div>
         </div>

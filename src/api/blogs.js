@@ -26,6 +26,20 @@ export const postBlogsFn = async (data) =>{
     }
 }
 
+export const putBlogsFn = async (data) =>{
+    const response = await fetch(`${API_URL}/blogs/${data.id}`, {
+        method: 'PUT',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+
+    if(!response.ok){
+        throw new Error('Ocurrio un error al agregar un blog')
+    }
+}
+
 export const deleteBlogFn = async (blogId)=>{
 
     const response = await fetch(`${API_URL}/blogs/${blogId}`, {
