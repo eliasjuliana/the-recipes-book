@@ -1,0 +1,9 @@
+.card-img{
+    width: 8rem;
+    height: 10rem;
+    overflow: hidden;
+}
+
+.recipe-title{
+    height: 3rem;
+}

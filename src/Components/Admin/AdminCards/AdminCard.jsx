@@ -4,6 +4,8 @@ import { deleteBlogFn } from "../../../api/blogs";
 import { toast } from "sonner";
 import { useBlog } from "../../../stores/useBlog";
 
+import '../../Admin/admin.css'
+
 const AdminCard = (props) => {
 
   const {blog} = props;
@@ -55,11 +57,11 @@ const AdminCard = (props) => {
 
   // __________________RENDER____________________________________
   return (
-    <article className="col-3">
+    <article className="col-4">
       <div className="card" style={{ width: "18rem" }}>
-        <img src={blog['image-url']} className="card-img-top" alt={blog.title}/>
+        <img src={blog['image-url']} className="card-img-top card-img" alt={blog.title}/>
         <div className="card-body">
-          <h5 className="card-title mb-3">{blog.title}</h5>
+          <h5 className="card-title mb-3 recipe-title">{blog.title}</h5>
           {/* <p className="card-text">{blog.content}</p> */}
           <div className="d-flex justify-content-end gap-2">
             <button className="btn btn-primary" onClick={handleEdit}>Editar</button>
