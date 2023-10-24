@@ -1,23 +1,47 @@
 import { useForm } from "react-hook-form";
 import Input from "../../Inputs/Input";
 import TextArea from "../../TextArea/TextArea";
-import { generateId } from "../../../helpers/helpers";
 import { toast } from "sonner";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { postBlogsFn } from "../../../api/blogs";
+import Swal from "sweetalert2";
 
-const AdminForm = (props) => {
-    const{register, handleSubmit: onSubmitRHF, formState: {errors}} = useForm();
+const AdminForm = () => {
 
-    const {setBlogs} = props;
+    // _____________________RHF__________________________________
+    const{register, handleSubmit: onSubmitRHF, formState: {errors}, reset} = useForm();
+
+    // __________________TQUERY____________________________________
+
+    const queryClient = useQueryClient();
+
+    const {mutate: postBlog} = useMutation({
+        mutationFn: postBlogsFn,
+        //mensaje de exito
+        onSuccess: ()=>{
+            Swal.close();
+            toast.success('Receta guardada correctamente');
+        //resetear el form
+        reset();
+
+        //recargar galeria con cards
+        queryClient.invalidateQueries('blogs')
+        },
+    
+        onError: ()=>{
+            Swal.close();
+            toast.error('Ocurrio un error al guardar la receta')
+        }
+    })
+
+    // __________________HANDLERS____________________________________
 
     const handleSubmit = (data) =>{
-        console.log(data);
-        const newBlog = {...data, id:generateId()}
-        
-        setBlogs((prev) =>[...prev, newBlog]);
-
-        toast.success('Receta guardada correctamente')
+        Swal.showLoading();
+        postBlog(data);        
     }
 
+        //_________________ RENDER__________________________________
   return (
     <form className="card" onSubmit={onSubmitRHF(handleSubmit)}>
         <Input 
