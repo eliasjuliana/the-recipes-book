@@ -1,28 +1,71 @@
 import { useForm } from "react-hook-form";
-import Input from "../../Inputs/Input";
-import TextArea from "../../TextArea/TextArea";
+import { useBlog } from "../../../stores/useBlog";
 import { toast } from "sonner";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { postBlogsFn } from "../../../api/blogs";
+import { postBlogsFn, putBlogsFn } from "../../../api/blogs";
+
+import Input from "../../Inputs/Input";
+import TextArea from "../../TextArea/TextArea";
+
 import Swal from "sweetalert2";
+
 
 const AdminForm = () => {
 
     // _____________________RHF__________________________________
-    const{register, handleSubmit: onSubmitRHF, formState: {errors}, reset} = useForm();
+    const{register, handleSubmit: onSubmitRHF, formState: {errors}, reset, setValue} = useForm();
+
+    // __________________ZUSTAND____________________________________
+    const {blog, clearBlog} = useBlog();
+
+    const isEditing = !!blog
+
+    //en caso que este editando un blog
+    if(isEditing){
+        setValue('title', blog.title);
+        setValue('image-url', blog['image-url']);
+        setValue('content', blog.content);
+    }
+
 
     // __________________TQUERY____________________________________
 
     const queryClient = useQueryClient();
 
+    //mutacion para CREATE(POST)
     const {mutate: postBlog} = useMutation({
         mutationFn: postBlogsFn,
         //mensaje de exito
         onSuccess: ()=>{
             Swal.close();
             toast.success('Receta guardada correctamente');
+
         //resetear el form
         reset();
+
+        //recargar galeria con cards
+        queryClient.invalidateQueries('blogs')
+        },
+    
+        onError: ()=>{
+            Swal.close();
+            toast.error('Ocurrio un error al guardar la receta')
+        }
+    })
+
+    //mutacion para UPDATE(PUT)
+    const {mutate: putBlog} = useMutation({
+        mutationFn: putBlogsFn,
+        //mensaje de exito
+        onSuccess: ()=>{
+            Swal.close();
+            toast.success('Receta guardada correctamente');
+
+        //resetear el form
+        reset();
+
+        //limpiar estado global
+        clearBlog();
 
         //recargar galeria con cards
         queryClient.invalidateQueries('blogs')
@@ -38,7 +81,12 @@ const AdminForm = () => {
 
     const handleSubmit = (data) =>{
         Swal.showLoading();
-        postBlog(data);        
+
+        if(isEditing){
+            putBlog({...data, id: blog.id})
+        } else{
+            postBlog(data);  
+        }
     }
 
         //_________________ RENDER__________________________________
