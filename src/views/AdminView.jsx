@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import AdminForm from "../Components/Admin/AdminForm/AdminForm"
-import AdminTable from "../Components/Admin/AdminTable/AdminTable"
+import AdminGallery from "../Components/Admin/AdminCards/AdminGallery";
 
 
 const blogsLS = JSON.parse(localStorage.getItem('blogs')) || [];
@@ -17,7 +17,7 @@ const AdminView = () => {
     <h1 className="text-dark">Panel de administracion</h1>
     <hr/>
     <AdminForm setBlogs={setBlogs}/>
-    <AdminTable setBlogs={setBlogs} blogs={blogs}/>
+    <AdminGallery setBlogs={setBlogs} blogs={blogs}/>
     </>
   )
 }

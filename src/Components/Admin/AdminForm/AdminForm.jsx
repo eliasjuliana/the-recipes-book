@@ -57,7 +57,6 @@ const AdminForm = (props) => {
             className='mt-2'
             label='Contenido del blog'
             name='content'
-            type='url'
             placeholder=''
             error = {!!errors.content} />
 
