@@ -1,6 +1,11 @@
+import { useSession } from "../stores/useSession"
+
 const HomeView = () => {
+
+  const {} = useSession();
+
   return (
-    <div>HomeView</div>
+    <h1>Bienvenido</h1>
   )
 }
 
