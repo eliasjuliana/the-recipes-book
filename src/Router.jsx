@@ -19,7 +19,7 @@ const Router = () => {
       <main className='container-fluid'>
         <Routes>
             <Route path='/' element={<HomeView/>}/>
-            <Route path='/detalle' element={<DetailView/>}/>
+            <Route path='/detail/:id' element={<DetailView/>}/>
             <Route path='/login' element={isLoggedIn ? <Navigate to='/'/> : <LoginView/>}/>
             <Route path='/admin' element={user?.isAdmin ? <AdminView/> : <Navigate to='/'/>}/>
             <Route path='/register' element={isLoggedIn ? <Navigate to='/'/> : <RegisterView/>}/>

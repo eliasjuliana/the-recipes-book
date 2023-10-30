@@ -1,12 +1,31 @@
-import { useSession } from "../stores/useSession"
+import { useQuery } from "@tanstack/react-query"
+
+
+import {getBlogsFn} from '../api/blogs'
+import BlogItem from "../Components/Home/BlogItem.jsx"
 
 const HomeView = () => {
 
-  const {} = useSession();
+  const {data: blogs, isLoading, isError} = useQuery({queryKey: ['blogs'], queryFn: getBlogsFn});
 
-  return (
-    <h1>Bienvenido</h1>
-  )
+
+  if(isLoading){
+    return <h3 className="mt-3 text-center">Cargando...</h3>
+  }
+
+  if(isError){
+    return (<div className="mt-3 alert alert-danger">Ocurrio un error al cargar las recetas</div>);
+  }
+
+  if(blogs){
+    return (
+      <section className="row mt-3">
+        {blogs.map((blog) => (<BlogItem key={blog.id} blog={blog}/>))}
+      </section>
+    )
+  }
+
+  return <></>
 }
 
 export default HomeView
