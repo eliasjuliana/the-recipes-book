@@ -49,5 +49,16 @@ export const deleteBlogFn = async (blogId)=>{
     if(!response.ok){
         throw new Error('Ocurrio un error al eliminar un blog')
     }
+}
 
+export const getBlogByIdFn = async (id) =>{
+    const response = await fetch(`${API_URL}/blogs/${id}`);
+
+    if(!response.ok) {
+        throw new Error('Ocurrio un error al traer las recetas')
+    }
+
+    const data = await response.json();
+
+    return data;
 }
