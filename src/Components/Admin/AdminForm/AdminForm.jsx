@@ -47,9 +47,9 @@ const AdminForm = () => {
         queryClient.invalidateQueries('blogs')
         },
     
-        onError: ()=>{
+        onError: (e)=>{
             Swal.close();
-            toast.error('Ocurrio un error al guardar la receta')
+            toast.error(e.message)
         }
     })
 
@@ -71,9 +71,9 @@ const AdminForm = () => {
         queryClient.invalidateQueries('blogs')
         },
     
-        onError: ()=>{
+        onError: (e)=>{
             Swal.close();
-            toast.error('Ocurrio un error al guardar la receta')
+            toast.error(e.message)
         }
     })
 
@@ -87,11 +87,18 @@ const AdminForm = () => {
         } else{
             postBlog(data);  
         }
+    };
+
+    const handleCancelEdition = () =>{
+        reset();
+        clearBlog();
     }
 
         //_________________ RENDER__________________________________
   return (
-    <form className="card" onSubmit={onSubmitRHF(handleSubmit)}>
+    <div className="my-5 flex justify-center">
+    {isEditing && <div className="alert alert-info">Estas editando la receta &quot; <span className="fw-bold">{blog.title}</span>&quot;</div> }
+    <form className="w-2/3 bg-neutral-400 rounded-md p-5 flex flex-col content-center" onSubmit={onSubmitRHF(handleSubmit)}>
         <Input 
             register={register} 
             options={{
@@ -99,8 +106,7 @@ const AdminForm = () => {
                 minLength: 4,
                 maxLength: 30,
             }}
-            className=''
-            label='Titulo'
+            className='my-2'
             name='title'
             placeholder='Receta'
             error = {!!errors.title} />
@@ -112,8 +118,7 @@ const AdminForm = () => {
                 minLength: 4,
                 pattern: /\.(jpeg|jpg|gif|png|bmp|svg|webp|tiff)$/i
             }}
-            className='mt-2'
-            label='Imagen'
+            className='my-2'
             name='image-url'
             type='url'
             placeholder='url de imagen'
@@ -126,16 +131,18 @@ const AdminForm = () => {
                 minLength: 4,
                 maxLength: 3000,
             }}
-            className='mt-2'
-            label='Contenido del blog'
+            className='my-2'
             name='content'
             placeholder=''
             error = {!!errors.content} />
 
             <div className="text-end">
                 <button type="submit" className="btn btn-danger mt-3">Guardar</button>
+
+                {isEditing && <button type="button" className="ms-2 btn btn-secondary mt-3" onClick={handleCancelEdition}>Cancelar edicion</button>}
             </div>
     </form>
+    </div>
   )
 }
 

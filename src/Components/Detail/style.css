@@ -1,9 +1,0 @@
-.content-image{
-    width: 200px;
-}
-
-@media (width < 768px){
-    .content-image{
-                width: 100%;
-    }
-}

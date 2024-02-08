@@ -4,73 +4,73 @@ import { deleteBlogFn } from "../../../api/blogs";
 import { toast } from "sonner";
 import { useBlog } from "../../../stores/useBlog";
 
-import '../../Admin/admin.css'
+import { Link } from "react-router-dom";
 
 const AdminCard = (props) => {
-
-  const {blog} = props;
-
+  const { blog } = props;
 
   // __________________ZUSTAND____________________________________
-  const {setBlogToEdit} = useBlog();
+  const { setBlogToEdit } = useBlog();
 
   // __________________TQUERY____________________________________
 
   const queryClient = useQueryClient();
 
-
-  const {mutate: deleteBlog} = useMutation({
+  const { mutate: deleteBlog } = useMutation({
     mutationFn: deleteBlogFn,
-    onSuccess: ()=>{
+    onSuccess: () => {
       Swal.close();
-      toast.success('Receta eliminada');
+      toast.success("Receta eliminada");
 
-      queryClient.invalidateQueries('blogs');
+      queryClient.invalidateQueries("blogs");
     },
-    onError: ()=>{
+    onError: (e) => {
       Swal.close();
-      toast.error('Ocurrio un error eliminando la receta')
-    }
-  })
+      toast.error(e.message);
+    },
+  });
 
   // ________________HANDLER____________________________
 
-  const handleEdit = () =>{
+  const handleEdit = () => {
     setBlogToEdit(blog);
-  }
+  };
 
-  const handleDelete = ()=>{
+  const handleDelete = () => {
     Swal.fire({
-        title: 'Estas seguro?',
-        text: `Estas por eliminar la receta ${blog.title}`,
-        showCancelButton: true,
-        confirmButtonText: 'Si, eliminar',
-        cancelButtonText: 'No'
-    }).then((response)=>{
-      if(response.isConfirmed){
+      title: "Estas seguro?",
+      text: `Estas por eliminar la receta ${blog.title}`,
+      showCancelButton: true,
+      confirmButtonText: "Si, eliminar",
+      cancelButtonText: "No",
+    }).then((response) => {
+      if (response.isConfirmed) {
         Swal.showLoading();
         //mutacion de eliminacion
-        deleteBlog(blog.id)
+        deleteBlog(blog.id);
       }
-    })
-}
+    });
+  };
 
   // __________________RENDER____________________________________
   return (
-    <article className="col-4">
-      <div className="card" style={{ width: "18rem" }}>
-        <img src={blog['image-url']} className="card-img-top card-img" alt={blog.title}/>
-        <div className="card-body">
-          <h5 className="card-title mb-3 recipe-title">{blog.title}</h5>
-          {/* <p className="card-text">{blog.content}</p> */}
-          <div className="d-flex justify-content-end gap-2">
-            <button className="btn btn-primary" onClick={handleEdit}>Editar</button>
-            <button className="btn btn-danger" onClick={handleDelete}>Eliminar</button>
-          </div>
+    <article className="card bg-base-100 shadow-xl">
+      <figure className="max-h-48">
+        <img src={blog["image-url"]} alt={blog.title} />
+      </figure>
+      <div className="card-body">
+        <h2 className="card-title">{blog.title}</h2>
+        <div className="card-actions justify-end">
+          <button className="btn btn-error" onClick={handleEdit}>
+            Edit
+          </button>
+          <button className="btn btn-danger" onClick={handleDelete}>
+            Delete
+          </button>
         </div>
       </div>
     </article>
-  )
-}
+  );
+};
 
-export default AdminCard
+export default AdminCard;

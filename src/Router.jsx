@@ -16,11 +16,11 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Navbar/>
-      <main className='container-fluid'>
+      <main className='bg-neutral-300 min-h-screen'>
         <Routes>
             <Route path='/' element={<HomeView/>}/>
             <Route path='/detail/:id' element={<DetailView/>}/>
-            <Route path='/login' element={isLoggedIn ? <Navigate to='/'/> : <LoginView/>}/>
+            {/* <Route path='/login' element={isLoggedIn ? <Navigate to='/'/> : <LoginView/>}/> */}
             <Route path='/admin' element={user?.isAdmin ? <AdminView/> : <Navigate to='/'/>}/>
             <Route path='/register' element={isLoggedIn ? <Navigate to='/'/> : <RegisterView/>}/>
             <Route path='*' element={<ErrorView/>}/>

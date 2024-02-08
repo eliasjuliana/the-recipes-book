@@ -1,25 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@300;400;600&family=Roboto:wght@300;500;900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-*{
-  font-family: 'Roboto', sans-serif;
-}
-body {
-  background-color: #e6e0d7;
-}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+  }
 
-#root{
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
+  @layer components {
+    .max-container {
+      max-width: 1440px;
+      margin: 0 auto;
+    }
 
-main{
-  margin-top: 60px;
-  margin-bottom: 25px;
-  flex: 1 0 auto;
-}
-
-
-footer{
-  flex-shrink: 0;
-}
+  }

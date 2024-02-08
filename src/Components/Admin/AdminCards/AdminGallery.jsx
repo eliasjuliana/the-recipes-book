@@ -6,14 +6,13 @@ const AdminGallery = (props) => {
     const {blogs} = props;
 
     return (
-        <div className="container mt-5">
-        <section className="row">
+
+        <section className="mb-5 grid grid-cols-4 gap-2">
                 {blogs.length === 0? <p>No hay recetas guardadas</p> : null}
-                {blogs.map((blog)=>{
+                {blogs.data.map((blog)=>{
                     return <AdminCard key={blog.id} blog = {blog}/>
                 })}
         </section>
-        </div>
 
     )
 }

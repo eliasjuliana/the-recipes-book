@@ -23,8 +23,9 @@
     {
       "firstname": "juliana",
       "lastname": "elias",
-      "userName": "julielias",
+      "email": "julielias",
       "password": "Aa@21234",
+      "isAuthenticated": false,
       "isAdmin": false,
       "id": 1
     },
@@ -35,6 +36,14 @@
       "password": "Aa@12345",
       "isAdmin": true,
       "id": 2
+    },
+    {
+      "firstname": "juliana",
+      "lastname": "Elias",
+      "userName": "julielias",
+      "password": "Aa*11234",
+      "isAdmin": false,
+      "id": 3
     }
   ]
 }

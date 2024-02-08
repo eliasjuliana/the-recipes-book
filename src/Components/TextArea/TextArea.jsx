@@ -1,16 +1,27 @@
 const TextArea = (props) => {
-    const {label, placeholder, type='text', name, options, register, className} = props;
+  const {
+    label,
+    placeholder,
+    type = "text",
+    name,
+    options,
+    register,
+    className,
+  } = props;
 
-    return (
-        <fieldset className={`form-floating ${className}`}>
-            <textarea 
-            id={`${name}-input`} 
-            className="form-control" 
-            placeholder={placeholder}
-            {...register(name, options)}/>
-            <label htmlFor={`${name}-input`}>{label}</label>
-        </fieldset>
-    )
-}
+  return (
+    <fieldset className={` ${className}`}>
+      <textarea
+        id={`${name}-input`}
+        className="textarea textarea-bordered w-full"
+        placeholder={placeholder}
+        {...register(name, options)}
+      />
+      <label htmlFor={`${name}-input`}>{label}</label>
 
-export default TextArea
+      
+    </fieldset>
+  );
+};
+
+export default TextArea;
