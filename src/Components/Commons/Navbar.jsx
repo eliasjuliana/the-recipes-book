@@ -86,7 +86,7 @@ const Navbar = () => {
         </div>
       </nav> */}
 
-      <nav className="navbar bg-base-100 fixed z-10">
+      <nav className="navbar bg-base-100 fixed z-10 top-0">
         <div className="sm:navbar-start flex justify-between w-full">
           <div className="dropdown">
             <div
@@ -141,7 +141,7 @@ const Navbar = () => {
           
           {/* <a className="btn btn-ghost text-xl">daisyUI</a> */}
           <Link className="text-2xl font-bold" to="/">
-            The Recipe Book
+            The Recipes Book
           </Link>
 
         </div>

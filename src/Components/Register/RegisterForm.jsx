@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import Input from "../Inputs/Input";
+import Input from "../Forms/Input";
 import { useMutation } from "@tanstack/react-query";
 import { postUserFn } from "../../api/users";
 import Swal from "sweetalert2";

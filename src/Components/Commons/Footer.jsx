@@ -9,7 +9,7 @@ const Footer = () => {
     <footer className="footer p-10 bg-neutral text-neutral-content flex justify-between">
       <aside className="flex">
         <span className="material-symbols-outlined">menu_book</span>
-        <p>The Recipe Book &reg;</p>
+        <p>The Recipes Book &reg;</p>
       </aside>
       <nav>
         {/* <h6 className="footer-title">Contact u</h6> */}

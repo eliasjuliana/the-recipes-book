@@ -11,13 +11,17 @@ const TextArea = (props) => {
 
   return (
     <fieldset className={` ${className}`}>
+            <div className="label">
+        <span className="label-text font-semibold text-xl">{label}</span>
+      </div>
       <textarea
+        type={type} 
         id={`${name}-input`}
-        className="textarea textarea-bordered w-full"
+        className="textarea textarea-bordered textarea-error w-full"
         placeholder={placeholder}
         {...register(name, options)}
       />
-      <label htmlFor={`${name}-input`}>{label}</label>
+      {/* <label htmlFor={`${name}-input`}>{label}</label> */}
 
       
     </fieldset>

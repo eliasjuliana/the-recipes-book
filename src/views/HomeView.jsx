@@ -4,6 +4,7 @@ import { getBlogsFn } from "../api/blogs";
 import BlogItem from "../Components/Home/BlogItem.jsx";
 import Hero from "../Components/Home/Hero.jsx";
 import { useRef } from "react";
+import Search from "../Components/Home/Search.jsx";
 
 const HomeView = () => {
   const {
@@ -37,10 +38,16 @@ const HomeView = () => {
     return (
       <>
         <section>
-          <Hero recipesRef={recipesRef}/>
+          <Hero recipesRef={recipesRef} />
         </section>
-        <section ref={recipesRef} className="px-4 py-2 grid grid-cols-5 gap-2 my-3">
 
+        <div className="w-1/3 mx-5">
+          <Search/>
+        </div>
+        <section
+          ref={recipesRef}
+          className="px-4 py-2 grid grid-cols-5 gap-2 my-3"
+        >
           {blogs.data.map((blog) => (
             <BlogItem key={blog.id} blog={blog} />
           ))}

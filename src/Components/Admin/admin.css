@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@200;300;400&display=swap');
+
+*{
+    font-family: 'Noto Sans JP', sans-serif; 
+}
+
+.card-img{
+    width: auto;
+    height: 10rem;
+    overflow: hidden;
+}
+
+.recipe-title{
+    height: 3rem;
+}
+
+.admin-card{
+    border-radius: 5px;
+    font-family:'Noto Sans JP', sans-serif;
+}
+
+.admin-card-title{
+    font-family:'Noto Sans JP', sans-serif;
+}
+
+.admin-card-description{
+    font-weight: 400;
+    font-family:'Noto Sans JP', sans-serif;
+}
+
+.admin-card-price{
+    font-family:'Noto Sans JP', sans-serif;
+}
+
+.admin-card-img{
+    /* height: 5rem;
+    width: 5rem; */
+    max-width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+
+.edit-btn{
+    padding: 0.3rem 0.5rem;
+    background-color: #F8C632;
+    border-radius: 5px;
+    border: none;
+}
+
+.delete-btn{
+    padding: 0.3rem 0.5rem;
+    background-color: #CD1D00;
+    border-radius: 5px;
+    border: none;
+    color: aliceblue;
+}
