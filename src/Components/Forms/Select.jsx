@@ -21,9 +21,12 @@ const Select = (props) => {
         </option>
         <option>Breakfast</option>
         <option>Lunch - Dinner</option>
+        <option>Pastas</option>
+        <option>Vegetarian</option>
         <option>Appetizers</option>
         <option>Desserts</option>
         <option>Smoothies - Juices</option>
+
       </select>
     </fieldset>
   );

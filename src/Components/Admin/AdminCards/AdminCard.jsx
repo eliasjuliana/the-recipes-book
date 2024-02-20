@@ -4,7 +4,6 @@ import { deleteBlogFn } from "../../../api/blogs";
 import { toast } from "sonner";
 import { useBlog } from "../../../stores/useBlog";
 
-import { Link } from "react-router-dom";
 
 const AdminCard = (props) => {
   const { blog } = props;

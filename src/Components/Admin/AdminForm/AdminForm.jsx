@@ -39,7 +39,8 @@ const AdminForm = () => {
     setValue("image-url", blog["image-url"]);
     setValue("content", blog.content);
     setValue("category", blog.category);
-    setValue("ingredients", blog.ingredients);
+    setValue("ingredient", blog.ingredients.ingredient);
+    setValue("amount", blog.ingredients.amount);
   }
 
   // __________________TQUERY____________________________________
@@ -95,12 +96,26 @@ const AdminForm = () => {
 
   const handleSubmit = (data) => {
     Swal.showLoading();
-    console.log(data);
+
+    // Crear un nuevo array de objetos combinando los arrays ingredients y amount
+    const newIngredients = data.ingredients.map((ingredient, index) => ({
+      ingredient,
+      amount: data.amount[index],
+    }));
+
+    // Crear un nuevo objeto de datos con el array combinado
+    const newData = {
+      ...data,
+      ingredients: newIngredients,
+    };
+
+    // Eliminar el campo amount del objeto newData
+    delete newData.amount;
 
     if (isEditing) {
-      putBlog({ ...data, id: blog.id });
+      putBlog({ ...newData, id: blog.id });
     } else {
-      postBlog(data);
+      postBlog(newData);
     }
   };
 
@@ -110,7 +125,6 @@ const AdminForm = () => {
   };
 
   const handleAddIngredient = () => {
-    console.log("add ingredients");
     let fields = {
       ingredient: "",
       amount: "",
@@ -124,23 +138,30 @@ const AdminForm = () => {
     setIngredientsFields(newFields);
   };
 
-  // const handleIngredientChange = (event, index) => {
-  //   // let ingredientsData = [...ingredientsFields];
-  //   // ingredientsData[index][event.target.ingredient] = event.target.value;
-  //   // setIngredientsFields(ingredientsData)
-  // };
-
   //_________________ RENDER__________________________________
   return (
-    <div className="my-5 flex justify-center">
+    <div className="my-5 pt-16 flex flex-col items-center">
       {isEditing && (
-        <div className="alert alert-info">
-          Estas editando la receta &quot;{" "}
-          <span className="fw-bold">{blog.title}</span>&quot;
+        <div role="alert" className="alert alert-error w-1/3">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="stroke-current shrink-0 h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          <span>You are editing the recipe &quot;{" "}
+        <span className="font-semibold">{blog.title}</span>&quot;</span>
         </div>
       )}
       <form
-        className="mt-20 w-1/3 bg-neutral-200 rounded-md p-5 flex flex-col content-center"
+        className="mt-20 w-1/3 bg-neutral-200 rounded-md p-5 flex flex-col "
         onSubmit={onSubmitRHF(handleSubmit)}
       >
         <div className="flex justify-between">
@@ -153,10 +174,10 @@ const AdminForm = () => {
           {isEditing && (
             <button
               type="button"
-              className="ms-2 btn btn-secondary mt-3"
+              className="btn btn-neutral"
               onClick={handleCancelEdition}
             >
-              Cancelar edicion
+              Cancel edition
             </button>
           )}
         </div>
@@ -231,26 +252,26 @@ const AdminForm = () => {
                 register={register}
                 options={{
                   required: true,
-                  minLength: 4,
+                  minLength: 1,
                 }}
                 className="mb-2 w-2/3"
-                name="ingredients"
+                name={`ingredients[${index}]`}
                 type="text"
                 placeholder="Ingredient"
-                error={!!errors["ingredient"]}
+                error={!!errors[`ingredients[${index}]`]}
               />
 
               <Input
                 register={register}
                 options={{
                   required: true,
-                  minLength: 4,
+                  minLength: 1,
                 }}
                 className="mb-2 w-1/3"
-                name="amount"
+                name={`amount[${index}]`}
                 type="text"
                 placeholder="Amount"
-                error={!!errors["amount"]}
+                error={!!errors[`amount[${index}]`]}
               />
               <span
                 className="material-symbols-outlined mt-8"

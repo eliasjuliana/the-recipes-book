@@ -6,6 +6,7 @@ const Hero = (props) => {
     const {recipesRef} = props
     recipesRef.current.scrollIntoView({ behavior: 'smooth' });
   }
+  
   return (
     <div
       className="hero min-h-screen"
